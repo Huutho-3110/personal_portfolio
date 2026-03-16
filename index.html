@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <div class="particle-background" id="particleBg"></div>
   <header class="navbar">
     <div class="container navbar-inner">
       <a class="brand" href="#home">
@@ -251,6 +252,24 @@
 
     loadProjects().then(() => revealOnScroll());
     initParallax();
+
+    // Generate particles
+    function createParticles() {
+      const particleBg = document.getElementById('particleBg');
+      const numParticles = 30;
+
+      for (let i = 0; i < numParticles; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.width = Math.random() * 6 + 2 + 'px';
+        particle.style.height = particle.style.width;
+        particle.style.animationDelay = Math.random() * 10 + 's';
+        particleBg.appendChild(particle);
+      }
+    }
+
+    createParticles();
   </script>
 </body>
 </html>
