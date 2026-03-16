@@ -50,7 +50,9 @@
         <h2 class="section-title reveal-on-scroll">Dự án nổi bật</h2>
         <p class="section-subtitle reveal-on-scroll">Một vài dự án tiêu biểu với C++ và Python, kết hợp giao diện web thân thiện.</p>
 
-        <div class="projects-grid" id="projectsGrid"></div>
+        <div class="carousel-container">
+          <div class="carousel-track" id="projectsGrid"></div>
+        </div>
 
         <template id="projectCardTemplate">
           <article class="project-card reveal-on-scroll">
@@ -195,11 +197,17 @@
         if (!res.ok) throw new Error('Không tải được dữ liệu dự án');
         const projects = await res.json();
         projectsGrid.innerHTML = '';
-        projects.forEach((project) => projectsGrid.appendChild(createProjectCard(project)));
+        // Duplicate projects for seamless loop
+        const allProjects = [...projects, ...projects];
+        allProjects.forEach((project) => projectsGrid.appendChild(createProjectCard(project)));
+        // Set width for carousel
+        projectsGrid.style.width = `calc(300px * ${allProjects.length} + 1.5rem * ${allProjects.length - 1})`;
       } catch (err) {
         console.warn('fetch dự án thất bại, dùng dữ liệu dự phòng', err);
         projectsGrid.innerHTML = '';
-        fallbackProjects.forEach((project) => projectsGrid.appendChild(createProjectCard(project)));
+        const allProjects = [...fallbackProjects, ...fallbackProjects];
+        allProjects.forEach((project) => projectsGrid.appendChild(createProjectCard(project)));
+        projectsGrid.style.width = `calc(300px * ${allProjects.length} + 1.5rem * ${allProjects.length - 1})`;
       }
     }
 

@@ -244,13 +244,34 @@ a {
   text-align: center;
 }
 
-.projects-grid {
-  display: grid;
+.carousel-container {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  margin-top: 2rem;
+}
+
+.carousel-track {
+  display: flex;
   gap: 1.5rem;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  animation: scroll 20s linear infinite;
+}
+
+.carousel-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 .project-card {
+  flex: 0 0 300px;
   background: rgba(22, 33, 62, 0.85);
   border: 1px solid rgba(226, 232, 240, 0.08);
   border-radius: var(--radius);
