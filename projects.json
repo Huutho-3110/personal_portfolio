@@ -1,0 +1,20 @@
+[
+  {
+    "title": "Elevator Simulator",
+    "description": "Mô phỏng hệ thống thang máy với các thuật toán điều khiển, ưu tiên và tối ưu hiệu suất bằng C++.",
+    "tags": ["C++", "Simulation", "Algorithm"],
+    "repoUrl": "https://github.com/Huutho-3110/Elevator"
+  },
+  {
+    "title": "Money Manager",
+    "description": "Ứng dụng quản lý tài chính cá nhân giúp theo dõi thu chi, báo cáo và phân tích bằng C++ thuần.",
+    "tags": ["C++", "Finance", "CLI"],
+    "repoUrl": "https://github.com/Huutho-3110/Expense_Management_Application"
+  },
+  {
+    "title": "Personal Portfolio",
+    "description": "Website portfolio responsive sử dụng HTML, CSS thuần, tập trung vào trải nghiệm người dùng.",
+    "tags": ["HTML", "CSS", "Responsive"],
+    "repoUrl": "https://github.com/Huutho-3110/portfolio"
+  }
+]

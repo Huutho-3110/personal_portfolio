@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio Cá Nhân</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="navbar">
+    <div class="container navbar-inner">
+      <a class="brand" href="#home">
+        <span class="logo">‣</span>
+        <span class="brand-name">[Tên của bạn]</span>
+      </a>
+      <nav class="nav-menu" aria-label="Chính">
+        <a href="#home">Trang chủ</a>
+        <a href="#projects">Dự án</a>
+        <a href="#skills">Kỹ năng</a>
+        <a href="#contact">Liên hệ</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section id="home" class="section hero">
+      <div class="container hero-content reveal-on-scroll">
+        <div class="hero-grid">
+          <div class="hero-media">
+            <img class="hero-avatar" src="ava.jpg" alt="Ảnh cá nhân" />
+          </div>
+
+          <div class="hero-text">
+            <p class="hero-subtitle">Xin chào, tôi là</p>
+            <h1 class="hero-title">Nguyễn Hữu Thọ</h1>
+            <p class="hero-role">Lập Trình Viên <span class="accent">(C++, Python, Web, DevOps)</span></p>
+            <p class="hero-description">
+              Tôi tạo ra các giải pháp phần mềm hiệu quả và trực quan, kết hợp tư duy kỹ thuật với thiết kế hiện đại.
+            </p>
+            <div class="hero-cta">
+              <a class="btn" href="#contact">Liên hệ với tôi</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="section projects">
+      <div class="container">
+        <h2 class="section-title reveal-on-scroll">Dự án nổi bật</h2>
+        <p class="section-subtitle reveal-on-scroll">Một vài dự án tiêu biểu với C++ và Python, kết hợp giao diện web thân thiện.</p>
+
+        <div class="projects-grid" id="projectsGrid"></div>
+
+        <template id="projectCardTemplate">
+          <article class="project-card reveal-on-scroll">
+            <h3 class="project-title"></h3>
+            <p class="project-desc"></p>
+            <div class="project-tags"></div>
+            <a class="project-btn" target="_blank" rel="noreferrer">Xem mã nguồn</a>
+          </article>
+        </template>
+      </div>
+    </section>
+
+    <section id="skills" class="section skills">
+      <div class="container">
+        <h2 class="section-title reveal-on-scroll">Kỹ năng</h2>
+        <p class="section-subtitle reveal-on-scroll">Các công nghệ và ngôn ngữ tôi thường sử dụng trong dự án.</p>
+
+        <div class="skills-grid">
+          <div class="skill-group">
+            <h3 class="skill-title">Ngôn ngữ</h3>
+            <div class="skill-tags">
+              <span class="skill-tag">C++</span>
+              <span class="skill-tag">Python</span>
+            </div>
+          </div>
+
+          <div class="skill-group">
+            <h3 class="skill-title">Web</h3>
+            <div class="skill-tags">
+              <span class="skill-tag">HTML</span>
+              <span class="skill-tag">CSS</span>
+              <span class="skill-tag">Flexbox</span>
+              <span class="skill-tag">Grid</span>
+            </div>
+          </div>
+
+          <div class="skill-group">
+            <h3 class="skill-title">Khác</h3>
+            <div class="skill-tags">
+              <span class="skill-tag">Git</span>
+              <span class="skill-tag">CLI</span>
+              <span class="skill-tag">Tối ưu thuật toán</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section contact">
+      <div class="container">
+        <h2 class="section-title">Liên hệ</h2>
+        <p class="section-subtitle">Gửi email, hoặc kết nối qua GitHub và LinkedIn.</p>
+
+        <div class="contact-cards">
+          <div class="contact-card">
+            <h3>Email</h3>
+            <p class="contact-info">
+              <a href="mailto:youremail@example.com">huutho3110@gmail.com</a>
+            </p>
+          </div>
+
+          <div class="contact-card">
+            <h3>GitHub</h3>
+            <p class="contact-info">
+              <a href="#" target="_blank" rel="noreferrer">https://github.com/Huutho-3110</a>
+            </p>
+          </div>
+
+          <div class="contact-card">
+            <h3>LinkedIn</h3>
+            <p class="contact-info">
+              <a href="#" target="_blank" rel="noreferrer">https://www.linkedin.com/in/huutho3110/</a>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <footer class="footer">
+        <div class="container footer-inner">
+          <span>© <span id="year"></span> Nguyễn Hữu Thọ. Tất cả quyền được bảo lưu.</span>
+          <span class="footer-credit">Thiết kế với HTML & CSS</span>
+        </div>
+      </footer>
+    </section>
+  </main>
+
+  <script>
+    const projectsUrl = 'projects.json';
+    const projectsGrid = document.getElementById('projectsGrid');
+    const projectTemplate = document.getElementById('projectCardTemplate');
+
+    // Nếu chạy trên file:// (hoặc fetch bị chặn), sẽ dùng dữ liệu tĩnh
+    const fallbackProjects = [
+      {
+        title: 'Elevator Simulator',
+        description:
+          'Mô phỏng hệ thống thang máy với các thuật toán điều khiển, ưu tiên và tối ưu hiệu suất bằng C++.',
+        tags: ['C++', 'Simulation', 'Algorithm'],
+        repoUrl: 'https://github.com/Huutho-3110/elevator',
+      },
+      {
+        title: 'Money Manager',
+        description:
+          'Ứng dụng quản lý tài chính cá nhân giúp theo dõi thu chi, báo cáo và phân tích bằng C++ thuần.',
+        tags: ['C++', 'Finance', 'CLI'],
+        repoUrl: 'https://github.com/Huutho-3110/money-app',
+      },
+      {
+        title: 'Trang web cá nhân',
+        description:
+          'Website portfolio responsive sử dụng HTML, CSS thuần, tập trung vào trải nghiệm người dùng.',
+        tags: ['HTML', 'CSS', 'Responsive'],
+        repoUrl: 'https://github.com/Huutho-3110/portfolio',
+      },
+    ];
+
+    function createProjectCard(project) {
+      const clone = projectTemplate.content.cloneNode(true);
+      const card = clone.querySelector('.project-card');
+      clone.querySelector('.project-title').textContent = project.title;
+      clone.querySelector('.project-desc').textContent = project.description;
+
+      const tagsContainer = clone.querySelector('.project-tags');
+      tagsContainer.innerHTML = '';
+      (project.tags || []).forEach((tag) => {
+        const span = document.createElement('span');
+        span.className = 'tag';
+        span.textContent = tag;
+        tagsContainer.appendChild(span);
+      });
+
+      const btn = clone.querySelector('.project-btn');
+      btn.href = project.repoUrl || '#';
+      btn.setAttribute('aria-label', `Xem mã nguồn của ${project.title}`);
+
+      return clone;
+    }
+
+    async function loadProjects() {
+      try {
+        const res = await fetch(projectsUrl);
+        if (!res.ok) throw new Error('Không tải được dữ liệu dự án');
+        const projects = await res.json();
+        projectsGrid.innerHTML = '';
+        projects.forEach((project) => projectsGrid.appendChild(createProjectCard(project)));
+      } catch (err) {
+        console.warn('fetch dự án thất bại, dùng dữ liệu dự phòng', err);
+        projectsGrid.innerHTML = '';
+        fallbackProjects.forEach((project) => projectsGrid.appendChild(createProjectCard(project)));
+      }
+    }
+
+    function revealOnScroll() {
+      const revealElements = document.querySelectorAll('.reveal-on-scroll');
+      const observer = new IntersectionObserver(
+        (entries, obs) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add('reveal');
+            obs.unobserve(entry.target);
+          });
+        },
+        { threshold: 0.2 }
+      );
+
+      revealElements.forEach((el) => observer.observe(el));
+    }
+
+    function initParallax() {
+      const hero = document.querySelector('.hero');
+      if (!hero) return;
+
+      let ticking = false;
+      const update = () => {
+        const offset = Math.min(window.scrollY * 0.2, 140);
+        hero.style.setProperty('--hero-offset', `${offset}px`);
+        ticking = false;
+      };
+
+      window.addEventListener('scroll', () => {
+        if (!ticking) {
+          window.requestAnimationFrame(update);
+          ticking = true;
+        }
+      });
+    }
+
+    // Update year in footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    loadProjects().then(() => revealOnScroll());
+    initParallax();
+  </script>
+</body>
+</html>
